@@ -6,7 +6,8 @@ var del = require('del'),
   concatcss = require('gulp-concat-css'),
   htmlmin = require('gulp-htmlmin'),
   imagemin = require('gulp-imagemin'),
-  pngquant = require('imagemin-pngquant');
+  pngquant = require('imagemin-pngquant'),
+  replace = require('gulp-replace');
 
 
 // Clear dist
@@ -37,7 +38,8 @@ gulp.task('html-en', ['css'], function () {
 gulp.task('html-pt', ['css'], function () {
   var sources = gulp.src(['dist/css/*.css'], { read: false });
   return gulp.src('src/pt/index.html')
-    .pipe(inject(sources, { ignorePath: 'dist/', addRootSlash: false, relative: true }))
+    .pipe(inject(sources, { addRootSlash: false, relative: true }))
+    .pipe(replace('../dist/', ''))
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('dist/pt'));
 });
