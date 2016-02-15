@@ -27,12 +27,19 @@ gulp.task('css-concat', function () {
 });
 
 // HTML
-gulp.task('html', ['css'], function () {
+gulp.task('html-en', ['css'], function () {
   var sources = gulp.src(['dist/css/*.css'], { read: false });
   return gulp.src('src/index.html')
     .pipe(inject(sources, { ignorePath: 'dist/', addRootSlash: false }))
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('dist'));
+});
+gulp.task('html-pt', ['css'], function () {
+  var sources = gulp.src(['dist/css/*.css'], { read: false });
+  return gulp.src('src/pt/index.html')
+    .pipe(inject(sources, { ignorePath: 'dist/', addRootSlash: false, relative: true }))
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest('dist/pt'));
 });
 
 // Images
@@ -53,6 +60,6 @@ gulp.task('copy', function () {
 
 
 // Default task
-gulp.task('default', ['clear', 'img', 'html', 'copy'], function () {
+gulp.task('default', ['clear', 'img', 'html-en', 'html-pt', 'copy'], function () {
   return del.sync('.temp');
 });

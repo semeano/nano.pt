@@ -28,6 +28,12 @@ a {
   text-decoration: none;
 }
 
+.lang {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
 footer {
   padding-top: 100px;
   padding-bottom: 10%;
